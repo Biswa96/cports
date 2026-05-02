@@ -2076,7 +2076,7 @@ def _bulkpkg(pkgs, statusf, do_build, do_raw, version):
                     for tmpn in flist:
                         do_build.append(tmpn)
                 else:
-                    print(" ".join(flist))
+                    print((" " if not version else "\n").join(flist))
         else:
             for pn in flist:
                 tp = templates[pn]
