@@ -28,8 +28,11 @@ url = "https://codeberg.org/LGFae/awww"
 source = f"{url}/archive/v{pkgver}.tar.gz"
 sha256 = "5e31092d5170b90ec614f76bad0739b729923a57979d2dfed3673cf0d8db2dee"
 
-if self.profile().arch in ["loongarch64"]:
-    broken = "cannot find value `MADV_SOFT_OFFLINE` in module `c`"
+match self.profile().arch:
+    case "loongarch64":
+        broken = "cannot find value `MADV_SOFT_OFFLINE` in module `c`"
+    case "ppc64le" | "ppc64" | "ppc":
+        broken = "uses rustix experimental runtime module, unavailable"
 
 
 def post_build(self):
